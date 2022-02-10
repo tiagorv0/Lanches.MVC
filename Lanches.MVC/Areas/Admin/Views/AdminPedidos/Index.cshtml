@@ -25,10 +25,10 @@ Total De Pedidos: @Model.TotalRecordCount
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                @Html.DisplayNameFor(model => model.PedidoId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sobrenome)
+                @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Endereco1)
@@ -63,12 +63,14 @@ Total De Pedidos: @Model.TotalRecordCount
     <tbody>
         @foreach (var item in Model)
         {
+
+
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
+                    @Html.DisplayFor(modelItem => item.PedidoId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Sobrenome)
+                    @String.Concat(item.Nome," ", item.Sobrenome)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Endereco1)

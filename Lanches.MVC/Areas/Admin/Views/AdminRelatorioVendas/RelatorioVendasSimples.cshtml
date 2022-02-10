@@ -73,10 +73,10 @@
                             @Html.DisplayFor(modelItem => item.PedidoTotal)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.TotalItensPedido)
+                            @String.Format("{0:dd/MM/yyyy hh:mm}", item.PedidoEnviado)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.PedidoEntregueEm)
+                            @String.Format("{0:dd/MM/yyyy hh:mm}", item.PedidoEntregueEm)
                         </td>
                     </tr>
                 }

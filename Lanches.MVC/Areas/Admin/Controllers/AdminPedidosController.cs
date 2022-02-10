@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReflectionIT.Mvc.Paging;
+using System.Text.RegularExpressions;
 
 namespace Lanches.MVC.Areas.Admin.Controllers
 {
@@ -19,16 +20,25 @@ namespace Lanches.MVC.Areas.Admin.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string filter, int pageindex = 1, string sort = "Nome")
+        public async Task<IActionResult> Index(string filter, int pageindex = 1, string sort = "PedidoEnviado")
         {
             var resultado = _context.Pedidos.AsNoTracking().AsQueryable();
+            string defaultSort = "Nome";
 
             if (!string.IsNullOrWhiteSpace(filter))
             {
-                resultado = resultado.Where(p => p.Nome.Contains(filter));
+                if (Regex.IsMatch(filter, @"^[0-9]+$"))
+                {
+                    resultado = resultado.Where(p => p.PedidoId == Convert.ToInt32(filter));
+                    defaultSort = "PedidoId";
+                }
+                else
+                {
+                    resultado = resultado.Where(p => p.Nome.Contains(filter));
+                    
+                }
             }
-
-            var model = await PagingList.CreateAsync(resultado, 5, pageindex, sort, "Nome");
+            var model = await PagingList.CreateAsync(resultado, 10, pageindex, sort, defaultSort);
             model.RouteValue = new RouteValueDictionary { { "filter", filter } };
 
             return View(model);
@@ -96,8 +106,9 @@ namespace Lanches.MVC.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
+                try {
+                    pedido.PedidoTotal = _context.Pedidos.Where(p => p.PedidoId == id).Select(p => p.PedidoTotal).FirstOrDefault();
+                    pedido.TotalItensPedido = _context.Pedidos.Where(p => p.PedidoId == id).Select(p => p.TotalItensPedido).FirstOrDefault();
                     _context.Update(pedido);
                     await _context.SaveChangesAsync();
                 }
