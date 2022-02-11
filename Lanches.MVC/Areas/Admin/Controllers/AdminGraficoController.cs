@@ -4,8 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Lanches.MVC.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    
     public class AdminGraficoController : Controller
     {
         private readonly GraficosVendasServico _graficoVendas;

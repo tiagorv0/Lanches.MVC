@@ -66,11 +66,14 @@ namespace Lanches.MVC.Controllers
                 lanches = _lancheRepository.Lanches
                     .Where(p => p.Nome.ToLower().Contains(searchString.ToLower()));
 
+
                 if (lanches.Any())
                     categoriaAtual = "Lanches";
                 else
                     categoriaAtual = "Nenhum lanche foi encontrado";
             }
+
+            ViewBag.TotalLanches = lanches.Count();
 
             return View("~/Views/Lanche/List.cshtml", new LancheListViewModel
             {
