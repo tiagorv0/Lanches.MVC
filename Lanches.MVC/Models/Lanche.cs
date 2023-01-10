@@ -9,9 +9,10 @@ namespace Lanches.MVC.Models
         [Key]
         public int LancheId { get; set; }
 
-        [StringLength(80,MinimumLength = 7,ErrorMessage = "O {0} deve ter no mínimo {1} e no máximo {2} caracateres")]
+        [StringLength(80,MinimumLength = 6,ErrorMessage = "O {0} deve ter no mínimo {1} e no máximo {2} caracateres")]
         [Required(ErrorMessage = "O nome do lanche deve ser informado")]
         [Display(Name = "Nome do Lanche")]
+        [BlockedNames]
         public string Nome { get; set; }
 
         [StringLength(200, MinimumLength = 20, ErrorMessage = "O Descrição deve ter no mínimo {1} e no máximo {2} caracateres")]
@@ -47,5 +48,17 @@ namespace Lanches.MVC.Models
         [Display(Name ="Categorias")]
         public int CategoriaId { get; set; }
         public virtual Categoria Categoria { get; set; }
+    }
+
+    public class BlockedNamesAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            var blockedNames = new List<string>() { "mclanche feliz", "big mac", "whopper", "big king" };
+
+            return blockedNames.Contains(((string)value).ToLower())
+                ? new ValidationResult("Nome Bloqueado! ")
+                : ValidationResult.Success;
+        }
     }
 }

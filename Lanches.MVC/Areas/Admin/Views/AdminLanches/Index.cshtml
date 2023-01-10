@@ -19,7 +19,9 @@ Total De Lanches: @Model.TotalRecordCount
 </div>
 
 <p>
-    <a asp-action="Create">Criar Lanche</a>
+    <a asp-action="Create">Criar Lanche</a> | 
+    <a asp-controller="AdminLanchesReport" asp-action="LanchesCategoriaReport">Gerar Relatório</a> |
+    <a asp-controller="AdminLanchesReport" asp-action="LanchesCategoriaPDF">Gerar PDF</a>
 </p>
 <div class="row">
     <div class="col-md-10">
