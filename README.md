@@ -1,5 +1,5 @@
 # Lanches.MVC
-MVC .Net 6, Identity, FrameworkCore, Paging
+MVC .Net 6, Identity, FrameworkCore, Paging, FastReport
 
 MVC realizado com o curso do Macoratti.  <br>
 Ajustei um pouco do layout e alguns bugs encontrados e incrementei algumas melhorias:
@@ -14,6 +14,7 @@ Ajustei um pouco do layout e alguns bugs encontrados e incrementei algumas melho
 - Identity;
 - Session;
 - .Net 6 FrameworkCore;
+- FastReport
 
 <p><img alt="Texto da propriedade alt" title="Propriedade title" src="https://github.com/tiagorv0/Lanches.MVC/blob/master/assets/index.png" /></p>
 
